@@ -1,2 +1,5 @@
-result/
+# symlink to finished vm build
+result
+
+# qemu hdd image
 *.qcow2
