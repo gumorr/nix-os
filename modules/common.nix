@@ -24,6 +24,8 @@
     settings.PasswordAuthentication = true;
   };
 
+  time.timeZone = "America/Central";
+
   # only used for vm
   virtualisation.vmVariant = {
     virtualisation = {

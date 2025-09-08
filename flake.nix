@@ -1,21 +1,40 @@
 # flake.nix
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-  outputs = { self, nixpkgs, ... } @ inputs:
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  }
+  outputs = { self, nixpkgs, impermanence, ... } @ inputs:
     let
       inherit (self) outputs;
 
-      mkNixOSConfig = path: system:
+      mkNixOSConfig = system: modules
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit inputs outputs;};
-          modules = [path];
+          inherit modules;
         };
     in
     {
       nixosConfigurations = {
-        GUMMI-DC-TEST = mkNixOSConfig ./hosts/gummi-dc-test/configuration.nix "x86_64-linux";
+        GUMMI-VM-01 = mkNixOSConfig "x86_64-linux" [
+          # ryzen 4650G
+          nixos-hardware.nixosModules.common-cpu-amd-pstate
+          nixos-hardware.nixosModules.common-gpu-amd
+
+          impermanence.nixosModules.impermanence
+
+          ./hosts/vm-01/configuration.nix
+        ];
       };
     };
 }
