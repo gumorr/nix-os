@@ -3,21 +3,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    impermanence = {
-      url = "github:nix-community/impermanence";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  }
-  outputs = { self, nixpkgs, impermanence, ... } @ inputs:
+    impermanence.url = "github:nix-community/impermanence";
+
+  };
+  outputs = { self, nixpkgs, impermanence, nixos-hardware, ... } @ inputs:
     let
       inherit (self) outputs;
 
-      mkNixOSConfig = system: modules
+      mkNixOSConfig = system: modules:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit inputs outputs;};
