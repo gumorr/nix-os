@@ -16,7 +16,8 @@
     # hashedPasswordFile = config.age.secrets."passwords/local-admin".path;
   };
 
-  # age.secrets."passwords/local-admin".file = ../secrets/passwords/local-admin.age;
+  age.secrets."passwords/local-admin".file = ../secrets/passwords/local-admin.age;
+  age.identityPaths = [ "/nix/persist/etc/ssh/ssh_host_rsa_key" "/nix/persist/etc/ssh/ssh_host_ed25519_key" ];
 
   # security
   security.sudo.execWheelOnly = true;
