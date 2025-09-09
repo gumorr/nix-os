@@ -4,8 +4,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     impermanence.url = "github:nix-community/impermanence";
+    agenix.url = "github:ryantm/agenix";
   };
-  outputs = { self, nixpkgs, nixos-hardware, impermanence, ... } @ inputs:
+  outputs = { self, nixpkgs, nixos-hardware, impermanence, agenix, ... } @ inputs:
     let
       inherit (self) outputs;
 
@@ -25,6 +26,9 @@
 
           # enable system impermanence
           impermanence.nixosModules.impermanence
+
+          # secret management
+          agenix.nixosModules.default
 
           ./hosts/vm-01/configuration.nix
         ];
