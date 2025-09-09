@@ -12,8 +12,8 @@
   users.users.local-admin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "test";
-    # hashedPasswordFile = config.age.secrets."passwords/local-admin".path;
+    # initialPassword = "test";
+    hashedPasswordFile = config.age.secrets."passwords/local-admin".path;
   };
 
   age.secrets."passwords/local-admin".file = ../secrets/passwords/local-admin.age;
