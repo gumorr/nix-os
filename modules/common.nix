@@ -15,16 +15,21 @@
     initialPassword = "test";
   };
 
+  # shared packages
   environment.systemPackages = with pkgs; [
     htop
   ];
 
+  time.timeZone = "America/Central";
+
+  # so i dont have kitty terminfo errors
+  environment.enableAllTerminfo = true;
+
+  # ssh with password auth
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
   };
-
-  time.timeZone = "America/Central";
 
   # only used for vm
   virtualisation.vmVariant = {
