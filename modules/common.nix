@@ -15,7 +15,16 @@
     initialPassword = "test";
   };
 
-  # shared packages
+  # security
+  security.sudo.execWheelOnly = true;
+  nix.allowedUsers = [ "@wheel" ];
+
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+  };
+
+  # packages
   environment.systemPackages = with pkgs; [
     htop
   ];
@@ -24,12 +33,6 @@
 
   # so i dont have kitty terminfo errors
   environment.enableAllTerminfo = true;
-
-  # ssh with password auth
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = true;
-  };
 
   # only used for vm
   virtualisation.vmVariant = {
