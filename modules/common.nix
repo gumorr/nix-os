@@ -17,7 +17,7 @@
 
   # security
   security.sudo.execWheelOnly = true;
-  nix.allowedUsers = [ "@wheel" ];
+  nix.settings.allowed-users = [ "@wheel" ];
 
   services.openssh = {
     enable = true;
