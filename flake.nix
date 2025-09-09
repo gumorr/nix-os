@@ -6,7 +6,7 @@
     impermanence.url = "github:nix-community/impermanence";
     agenix.url = "github:ryantm/agenix";
   };
-  outputs = { self, nixpkgs, nixos-hardware, impermanence, agenix... } @ inputs:
+  outputs = { self, nixpkgs, nixos-hardware, impermanence, agenix, ... } @ inputs:
     let
       inherit (self) outputs;
 
