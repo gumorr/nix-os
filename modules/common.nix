@@ -9,12 +9,10 @@
   };
 
   # local admin account
-  age.secrets.localAdminPwd.file = ../secrets/localAdminPwd.age;
-
   users.users.local-admin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = config.age.secrets.localAdminPwd.path;
+    initialPassword = "test";
   };
 
   # security
