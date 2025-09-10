@@ -14,7 +14,10 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit inputs outputs;};
-          inherit modules;
+          modules = [
+            # secret management
+            agenix.nixosModules.default
+          ] ++  modules;
         };
     in
     {
@@ -26,9 +29,6 @@
 
           # enable system impermanence
           impermanence.nixosModules.impermanence
-
-          # secret management
-          agenix.nixosModules.default
 
           ./hosts/vm-01/configuration.nix
         ];
