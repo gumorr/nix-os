@@ -36,12 +36,15 @@
     useDHCP = false;
 
     # common firewall settings
-    allowedTCPPorts = [
-      22
-    ];
-    allowedUDPPorts = [
-      22
-    ];
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+      ];
+      allowedUDPPorts = [
+        22
+      ];
+    };
 
     # network bridge config
     bridges = {
