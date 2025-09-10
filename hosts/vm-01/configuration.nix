@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, ... }:
 {
   imports = [
     # config for ryzen 4650G
