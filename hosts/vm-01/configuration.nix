@@ -33,8 +33,15 @@
     hostName = "GUMMI-VM-01";
 
     nftables.enable = true;
-    firewall.enable = false;
     useDHCP = false;
+
+    # common firewall settings
+    allowedTCPPorts = [
+      22
+    ];
+    allowedUDPPorts = [
+      22
+    ];
 
     # network bridge config
     bridges = {
@@ -53,6 +60,16 @@
       };
       br1 = {
         useDHCP = true;
+        allowedTCPPorts = [
+          53
+          67
+          547
+        ];
+        allowedUDPPorts = [
+          53
+          67
+          547
+        ];
       };
     };
   };
