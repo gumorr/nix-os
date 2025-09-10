@@ -1,5 +1,10 @@
 { inputs, config, pkgs, ... }:
 {
+  imports = [
+    # secret management
+    inputs.agenix.nixosModules.default
+  ];
+
   # use grub as bootloader
   boot.loader.grub = {
     enable = true;
@@ -8,6 +13,9 @@
     device = "nodev";
   };
 
+  # enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # local admin account
   users.users.local-admin = {
     isNormalUser = true;
@@ -15,8 +23,10 @@
     hashedPasswordFile = config.age.secrets."passwords/local-admin".path;
   };
 
-  age.secrets."passwords/local-admin".file = ../secrets/passwords/local-admin.age;
-  age.identityPaths = [ "/nix/persist/etc/ssh/ssh_host_rsa_key" "/nix/persist/etc/ssh/ssh_host_ed25519_key" ];
+  age = {
+    # identityPaths = [ "/nix/persist/etc/ssh/ssh_host_rsa_key" "/nix/persist/etc/ssh/ssh_host_ed25519_key" ];
+    secrets."passwords/local-admin".file = ../secrets/passwords/local-admin.age;
+  };
 
   # security
   security.sudo.execWheelOnly = true;

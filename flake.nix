@@ -6,32 +6,20 @@
     impermanence.url = "github:nix-community/impermanence";
     agenix.url = "github:ryantm/agenix";
   };
-  outputs = { self, nixpkgs, nixos-hardware, impermanence, agenix, ... } @ inputs:
+  outputs = { self, nixpkgs, ... } @ inputs:
     let
       inherit (self) outputs;
 
-      mkNixOSConfig = system: modules:
+      mkNixOSConfig = system: path:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {inherit inputs outputs;};
-          modules = [
-            # secret management
-            agenix.nixosModules.default
-          ] ++  modules;
+          modules = [ path ];
         };
     in
     {
       nixosConfigurations = {
-        GUMMI-VM-01 = mkNixOSConfig "x86_64-linux" [
-          # config for ryzen 4650G
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-amd
-
-          # enable system impermanence
-          impermanence.nixosModules.impermanence
-
-          ./hosts/vm-01/configuration.nix
-        ];
+        GUMMI-VM-01 = mkNixOSConfig "x86_64-linux" ./hosts/vm-01/configuration.nix;
       };
     };
 }
