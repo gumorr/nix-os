@@ -38,12 +38,41 @@
     # common firewall settings
     firewall = {
       enable = true;
+
       allowedTCPPorts = [
         22
       ];
       allowedUDPPorts = [
         22
       ];
+
+      interfaces = {
+        "br0" = {
+          allowedTCPPorts = [
+            53
+            67
+            547
+          ];
+          allowedUDPPorts = [
+            53
+            67
+            547
+          ];
+        };
+
+        "br1" = {
+          allowedTCPPorts = [
+            53
+            67
+            547
+          ];
+          allowedUDPPorts = [
+            53
+            67
+            547
+          ];
+        };
+      };
     };
 
     # network bridge config
@@ -63,16 +92,6 @@
       };
       br1 = {
         useDHCP = true;
-        allowedTCPPorts = [
-          53
-          67
-          547
-        ];
-        allowedUDPPorts = [
-          53
-          67
-          547
-        ];
       };
     };
   };
