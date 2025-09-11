@@ -8,6 +8,7 @@
     # host specific config
     ./hardware-configuration.nix
     ./networking.nix
+    ./incus.nix
 
     # modules
     ../../modules/common.nix
