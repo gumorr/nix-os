@@ -2,6 +2,9 @@
 {
   # networking
   networking = {
+    # see: https://discourse.nixos.org/t/bridge-interface-for-virtio-vms-dymamic-dhcp-for-host-and-for-vms/54486/5
+    networkmanager.enable = false;
+
     hostName = "GUMMI-VM-01";
 
     nftables.enable = true;
@@ -39,6 +42,12 @@
         useDHCP = true;
       };
       br1 = {
+        useDHCP = true;
+      };
+      enp35s0 = {
+        useDHCP = true;
+      };
+      enp36s0 = {
         useDHCP = true;
       };
     };
