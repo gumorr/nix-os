@@ -42,13 +42,13 @@
         useDHCP = true;
       };
       br1 = {
-        useDHCP = true;
+        useDHCP = false;
       };
       enp35s0 = {
         useDHCP = true;
       };
       enp36s0 = {
-        useDHCP = true;
+        useDHCP = false;
       };
     };
   };
