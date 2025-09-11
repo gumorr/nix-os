@@ -9,7 +9,8 @@
     directories = [
       "/etc/nixos"
       "/export"
-      "/var/lib"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
       "/var/log"
     ];
     files = [
