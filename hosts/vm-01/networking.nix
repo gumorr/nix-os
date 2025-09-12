@@ -2,8 +2,7 @@
 {
   # networking
   networking = {
-    # see: https://discourse.nixos.org/t/bridge-interface-for-virtio-vms-dymamic-dhcp-for-host-and-for-vms/54486/5
-    networkmanager.enable = false;
+    networkmanager.enable = true;
 
     hostName = "GUMMI-VM-01";
 
